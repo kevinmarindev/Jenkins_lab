@@ -1,19 +1,30 @@
 pipeline {
     agent any
+    tools {
+        maven 'maven'
+    }
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                dir('./starter') {
+                    checkout scm
+
+                }
             }
         }
         stage('Build') {
             steps {
-                sh 'mvn -B clean package'
+                dir('./starter'){
+                    sh 'mvn -B clean package'
+                }
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn -B test'
+                 dir('./starter'){
+                    sh 'mvn -B test'
+                 }
+                
             }
             post {
                 always {

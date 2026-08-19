@@ -11,15 +11,15 @@ pipeline {
         }
         stage('Build') {
             steps {
-                dir(starter){
+                dir('starter'){
                     sh 'mvn -B clean package'
                 }
             }
         }
         stage('Test') {
             steps {
-                dir(starter){
-
+                dir('starter'){
+                    sh 'mvn test'
                 }
             }
             post {

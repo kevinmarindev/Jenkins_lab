@@ -11,16 +11,20 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn -B clean package'
+                dir(starter){
+                    sh 'mvn -B clean package'
+                }
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn -B test'
+                dir(starter){
+
+                }
             }
             post {
                 always {
-                    junit 'target/surfire-reports/*.xml'
+                    junit 'starter/target/surefire-reports/*.xml'
                 }
             }
         }
